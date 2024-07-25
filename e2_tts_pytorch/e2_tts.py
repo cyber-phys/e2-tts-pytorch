@@ -653,6 +653,7 @@ class E2TTS(Module):
         out = torch.where(cond_mask, cond, out)
 
         if exists(vocoder):
+            out = out[:,cond_seq_len:]
             out = rearrange(out, 'b n d -> b d n')
             out = vocoder(out)
 
